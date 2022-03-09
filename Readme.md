@@ -46,3 +46,12 @@ Reliability: we can replicate shards
 2. Erase and write whole storage? Prepare second table and then exchange tables
 3. 1M reads per minute? Data is sharded, requests are load balanced
 4. deployment, scaling, monitoring? I would implement metrics within REST service, expose it with expvar package, monitor service and database with grafana. Scaling is horizontal, just add more machines.
+
+## How to run
+
+1. Install clickhouse-server
+2. Create table: clickhouse-client --queries-file sql/promotions.sql
+3. Insert data: see example above
+4. Build service: go build cmd/rest/ -o rest
+5. Run service: ./rest -c config.yaml
+6. curl 'http://0.0.0.0:8080/promotions/d018ef0b-dbd9-48f1-ac1a-eb4d90e57118'
